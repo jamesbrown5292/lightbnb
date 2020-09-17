@@ -139,6 +139,12 @@ const getAllProperties = function(options, limit = 10) {
     `
   }
 
+  if (options.minimum_rating) {
+    queryParams.push(options.minimum_rating);
+    queryString += `AND property_reviews.rating  >= $${queryParams.length}
+    `
+  }
+
   queryParams.push(limit);
   queryString += `
   GROUP BY properties.id
